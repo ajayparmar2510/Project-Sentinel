@@ -1,0 +1,15 @@
+{
+  "phase": "18.2",
+  "status": "reviewer_rankings_rebuilt_and_validated",
+  "minimum_reviews": 5,
+  "total_reviewer_profiles": 260277,
+  "eligible_reviewers": 23831,
+  "excluded_reviewers": 236446,
+  "percentage_range": [
+    0.0,
+    60.0
+  ],
+  "corrected_source": "results/phase18_reviewer_profiles_corrected.csv",
+  "ranking_file": "results/phase18_reviewer_rankings_min5.csv",
+  "interpretation": "Exploratory retrospective risk ranking, not proof of fraud."
+}

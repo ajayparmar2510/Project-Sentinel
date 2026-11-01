@@ -1,0 +1,11 @@
+{
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "total_rows": 608598,
+  "completed_rows": 608598,
+  "embedding_dimensions": 384,
+  "device": "mps",
+  "source_size": 404897275,
+  "source_mtime_ns": 1788603622178564424,
+  "chunk_size": 2000,
+  "window_size": 20
+}

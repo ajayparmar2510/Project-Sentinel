@@ -1,0 +1,16 @@
+{
+  "phase": "18.1",
+  "status": "descriptive_profiles_created",
+  "source_rows": 608598,
+  "unique_reviewers": 260277,
+  "unique_products": 5044,
+  "reviewer_profile_rows": 260277,
+  "product_profile_rows": 5044,
+  "risk_index_flag_threshold": 19.5754,
+  "threshold_interpretation": "Exploratory review-prioritization flag; not a fraud probability",
+  "profiles_are_retrospective": true,
+  "predictive_feature_use": false,
+  "source_score_file_modified": false,
+  "reviewer_profile_file": "results/phase18_reviewer_profiles.csv",
+  "product_profile_file": "results/phase18_product_profiles.csv"
+}

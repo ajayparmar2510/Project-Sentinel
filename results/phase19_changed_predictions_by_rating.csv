@@ -1,0 +1,6 @@
+rating,Improved: fake review detected,Improved: genuine review correctly cleared,Regressed: fake review missed,Regressed: genuine review flagged
+1.0,17,35,20,62
+2.0,43,118,32,201
+3.0,34,136,29,161
+4.0,120,283,83,337
+5.0,291,687,171,833

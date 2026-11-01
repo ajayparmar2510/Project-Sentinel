@@ -1,0 +1,37 @@
+{
+  "phase": "17.1",
+  "status": "completed",
+  "score": "Existing Phase 13 trust_signal_mean",
+  "risk_definition": "1 - trust_signal_mean",
+  "threshold_selection": "Maximum F1 on validation split only",
+  "selected_validation_threshold": 0.4204,
+  "validation_metrics": {
+    "rows": 91087,
+    "threshold": 0.4204,
+    "precision": 0.19069329122306555,
+    "recall": 0.6871959614502066,
+    "f1": 0.2985425763103854,
+    "accuracy": 0.6137429051346515,
+    "roc_auc": 0.6912741579456665,
+    "pr_auc": 0.20772598422216304,
+    "tn": 48417,
+    "fp": 31775,
+    "fn": 3408,
+    "tp": 7487
+  },
+  "test_metrics": {
+    "rows": 91717,
+    "threshold": 0.4204,
+    "precision": 0.2077678638374447,
+    "recall": 0.685891089108911,
+    "f1": 0.3189273177188237,
+    "accuracy": 0.6128852884416194,
+    "roc_auc": 0.6903924663230296,
+    "pr_auc": 0.22759067143371378,
+    "tn": 47899,
+    "fp": 31698,
+    "fn": 3807,
+    "tp": 8313
+  },
+  "note": "This evaluates an existing heuristic score; it is not a calibrated probability. Test metrics are diagnostic and must not be used to tune the score."
+}

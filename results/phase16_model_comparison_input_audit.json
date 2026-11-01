@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "checks": [
+    "train: PASS",
+    "validation: PASS",
+    "test: PASS"
+  ],
+  "splits": {
+    "train": {
+      "rows": 425794,
+      "audit_rows": 425794,
+      "unique_row_ids": 425794,
+      "original_feature_count": 41,
+      "semantic_feature_count": 43,
+      "undefined_similarity_rows": 4627,
+      "defined_similarity_rows": 421167,
+      "zero_prior_product_history_rows": 4627,
+      "target_labels_identical": true,
+      "original_features_identical_in_order": true
+    },
+    "validation": {
+      "rows": 91087,
+      "audit_rows": 91087,
+      "unique_row_ids": 91087,
+      "original_feature_count": 41,
+      "semantic_feature_count": 43,
+      "undefined_similarity_rows": 395,
+      "defined_similarity_rows": 90692,
+      "zero_prior_product_history_rows": 395,
+      "target_labels_identical": true,
+      "original_features_identical_in_order": true
+    },
+    "test": {
+      "rows": 91717,
+      "audit_rows": 91717,
+      "unique_row_ids": 91717,
+      "original_feature_count": 41,
+      "semantic_feature_count": 43,
+      "undefined_similarity_rows": 330,
+      "defined_similarity_rows": 91387,
+      "zero_prior_product_history_rows": 330,
+      "target_labels_identical": true,
+      "original_features_identical_in_order": true
+    }
+  },
+  "notes": [
+    "Model CSVs do not contain row_id or identity columns.",
+    "Separate M3 audit CSVs provide row identity and ordering."
+  ]
+}

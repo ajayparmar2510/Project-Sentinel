@@ -1,0 +1,98 @@
+
+FILE: results/phase16_model_comparison_test_predictions.csv
+COLUMNS: ['row_id', 'fake_label', 'baseline_probability', 'baseline_prediction', 'semantic_probability', 'semantic_prediction']
+SAMPLE:
+ row_id  fake_label  baseline_probability  baseline_prediction  semantic_probability  semantic_prediction
+   1199           1              0.586831                    1              0.520854                    1
+   3295           0              0.060756                    0              0.072901                    0
+   5166           0              0.005398                    0              0.006836                    0
+DATA ROWS: 91717
+
+FILE: results/review_lookup_test.csv
+COLUMNS: ['row_id', 'user_id_audit', 'prod_id_audit', 'date_audit', 'fake_label_audit', 'baseline_probability', 'baseline_prediction', 'semantic_probability', 'semantic_prediction', 'user_id_feature', 'prod_id_feature', 'rating', 'fake_label_feature', 'date_feature', 'word_count', 'char_count', 'sentence_count', 'avg_word_length', 'exclamation_count', 'question_count', 'uppercase_ratio', 'punctuation_count', 'user_prior_reviews', 'user_prior_unique_products', 'user_prior_avg_rating', 'user_prior_avg_review_length', 'days_since_user_previous_review', 'review_year', 'review_month', 'review_day_of_week', 'user_prior_reviews_7d', 'user_prior_reviews_30d', 'user_prior_reviews_90d', 'user_prior_reviews_365d', 'user_prior_rating_variance', 'user_burstiness_flag', 'product_prior_reviews', 'product_prior_unique_users', 'product_prior_avg_rating', 'product_prior_rating_variance', 'days_since_product_previous_review', 'product_prior_reviews_7d', 'product_prior_reviews_30d', 'product_prior_reviews_90d', 'product_prior_reviews_365d', 'normalized_text_length', 'review_text_duplicate_count', 'review_text_is_duplicate', 'review_text_reuse_ratio', 'user_rating_deviation', 'user_product_diversity', 'user_rating_std', 'product_rating_deviation', 'product_user_diversity', 'repeated_word_ratio', 'review_text']
+SAMPLE:
+ row_id  user_id_audit  prod_id_audit date_audit  fake_label_audit  baseline_probability  baseline_prediction  semantic_probability  semantic_prediction  user_id_feature  prod_id_feature  rating  fake_label_feature date_feature  word_count  char_count  sentence_count  avg_word_length  exclamation_count  question_count  uppercase_ratio  punctuation_count  user_prior_reviews  user_prior_unique_products  user_prior_avg_rating  user_prior_avg_review_length  days_since_user_previous_review  review_year  review_month  review_day_of_week  user_prior_reviews_7d  user_prior_reviews_30d  user_prior_reviews_90d  user_prior_reviews_365d  user_prior_rating_variance  user_burstiness_flag  product_prior_reviews  product_prior_unique_users  product_prior_avg_rating  product_prior_rating_variance  days_since_product_previous_review  product_prior_reviews_7d  product_prior_reviews_30d  product_prior_reviews_90d  product_prior_reviews_365d  normalized_text_length  review_text_duplicate_count  review_text_is_duplicate  review_text_reuse_ratio  user_rating_deviation  user_product_diversity  user_rating_std  product_rating_deviation  product_user_diversity  repeated_word_ratio                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           review_text
+   1199           6241              9 2014-07-21                 1              0.586831                    1              0.520854                    1             6241                9     5.0                   1   2014-07-21          48         269               6           4.6250                  0               0           0.0425                 10                   0                           0                    0.0                           0.0                               -1         2014             7                   0                      0                       0                       0                        0                        0.00                     0                   2227                        2227                    2.4948                         1.7237                                   1                        12                         59                        161                         700                     262                            1                         0                      0.0                    0.0                     0.0           0.0000                    2.5052                     1.0               0.1765                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         I was invited into Geno's as a guest. This is one of the cleanest kitchens I've ever been in. The steaks are nothing short of amazing. Definitely go. Try every cheese steak place in philly, they're all pretty good. I just love Genos for its personality and cleanliness.
+   3295           8327           3889 2014-07-21                 0              0.060756                    0              0.072901                    0             8327             3889     2.0                   0   2014-07-21         193        1103              17           4.7202                  2               0           0.0366                 35                   1                           1                    4.0                         190.0                              565         2014             7                   0                      0                       0                       0                        0                        0.00                     0                    106                         106                    3.7547                         1.4870                                  15                         0                          4                          8                          36                    1072                            1                         0                      0.0                    2.0                     1.0           0.0000                    1.7547                     1.0               0.4112                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       If all it takes to win stars is the location, then this place would definitely be top notch. Loved this feel of this little place! Cute little brick 2 story makes me excited to see what lies in store... Loved how intimate the setting is...Wood floors, white walls, filled with white draped tables intermingled with white-washed wooden posts. Makes everything seem like a blank canvas awaiting the colors and flavors of Thailand to grace the stage. Colorful Thai fare, yes! Flavorful Thai fare, not so much. Ordered a few of the staples I typically prefer on a first visit: Pad Kee Mao and Papaya Salad. Ordered both Medium heat since I'm fairly comfortable with Thai spice. Unfortunately, they either forgot to spice or they just went waaaayyyyyyy too easy on me. The colorful dishes left me yearning for missing flavors and spice. Lunch portions may be a bit smaller than Dinner. Maybe not...but come to think of it, having a larger portion of bland Thai leftovers might have been a bad thing to bring back to the hotel room. Guess my venture into the Philly Thai Cuisine scene just didn't work out. :(
+   5166          10124           4807 2014-07-21                 0              0.005398                    0              0.006836                    0            10124             4807     2.0                   0   2014-07-21         331        1813              20           4.4804                  1               0           0.0251                 47                   5                           5                    2.6                         646.8                              209         2014             7                   0                      0                       0                       0                        1                        1.84                     0                      0                           0                    0.0000                         0.0000                                  -1                         0                          0                          0                           0                    1766                            1                         0                      0.0                    0.6                     1.0           1.3565                    0.0000                     0.0               0.5813 Well there is one new restaurant that Lou and I will not be recommending to anyone, Buen Provecho (located on the corner of Kuser Rd and Hamilton Ave where Peasants, the The Pub used to be). Unlike it's predecessors, the food was subpar (and that is being nice). First the service was unorganized, we had at least four people ask how many in our party and then tell us they would seat us momentarily. Once we were seated, we were completely forgotten. Another party was seated a few minutes after us and right next to us, the waitress took their drink order with in seconds of them being seated, brought their drinks and took their dinner order, and not even a glance our way. I finally (nicely) got her attendtion. We started off with the octopus salad. The octopus was okay, but lacked seasoning and acid, like lemon juice and the whole thing sat in about a half a cup of oil. my boyfriend ordered the fish stew. It was inedible! The stew tasted like shellfish gone bad meets a salt lick. His replacement order was some overcooked chicken in a tasteless sauce with burnt plantain chips. My dish was supposed to be chicken breast stuffed with plantain mash and a mango sauce with yellow rice. Turns out the chef had other plans and the half overcooked, half almost raw chicken breast was stuffed with (what I was later informed) sausage which reminded me more of stale bread). The mango sauce was in a little side dish and looked like it had come out of a baby food jar. The rice was just dry. Again, the whole dish was completely under seasoned. The best thing about the whole meal (sometimes) was the cafe con leche, but even that was inconsistent. He had two cups, one perfect and the other was like burnt coffee. I love good Spanish food, this was definitely NOT good Spanish food and not worth the $45 bill.
+DATA ROWS: 91717
+
+FILE: results/phase18_reviewer_profiles_corrected.csv
+COLUMNS: ['user_id', 'review_count', 'mean_risk_index', 'median_risk_index', 'max_risk_index', 'risk_index_std', 'high_risk_review_count', 'distinct_other_entities', 'first_review_date', 'last_review_date', 'high_risk_review_pct']
+SAMPLE:
+ user_id  review_count  mean_risk_index  median_risk_index  max_risk_index  risk_index_std  high_risk_review_count  distinct_other_entities first_review_date last_review_date  high_risk_review_pct
+    5130             1        40.433690          40.433690       40.433690             NaN                       1                        1        2013-02-13       2013-02-13                 100.0
+  232223             1        40.250874          40.250874       40.250874             NaN                       1                        1        2012-09-01       2012-09-01                 100.0
+   86091             1        40.173154          40.173154       40.173154             NaN                       1                        1        2012-09-15       2012-09-15                 100.0
+DATA ROWS: 260277
+
+FILE: results/phase17_trust_intelligence_scores.csv
+COLUMNS: ['row_id', 'user_id', 'prod_id', 'date', 'trust_intelligence_risk_score', 'score_interpretation']
+SAMPLE:
+ row_id  user_id  prod_id       date  trust_intelligence_risk_score                                          score_interpretation
+ 215091   122580     1881 2004-10-20                      24.947620 Relative model risk index; not a calibrated fraud probability
+ 225741   134623     1941 2004-11-02                      24.734026 Relative model risk index; not a calibrated fraud probability
+ 308967    21722     1123 2004-12-09                      24.680332 Relative model risk index; not a calibrated fraud probability
+DATA ROWS: 608598
+
+FILE: results/reviewer_activity_summary.csv
+COLUMNS: ['user_id', 'review_count', 'average_rating', 'first_review', 'last_review', 'burst_flag_count', 'duplicate_review_count', 'review_span_days', 'review_count_band']
+SAMPLE:
+ user_id  review_count  average_rating first_review last_review  burst_flag_count  duplicate_review_count  review_span_days review_count_band
+    8367           197        3.979695   2008-04-08  2014-12-01                25                       0              2428              101+
+    9501           185        4.367568   2008-05-05  2015-01-06                14                       0              2437              101+
+    7871           178        3.853933   2010-04-10  2014-12-28                37                       0              1723              101+
+DATA ROWS: 260277
+
+MODEL: phase16_baseline_model.joblib
+TYPE: <class 'sklearn.ensemble._hist_gradient_boosting.gradient_boosting.HistGradientBoostingClassifier'>
+CLASSES: [0 1]
+FEATURE COUNT: 41
+FEATURE NAMES: ['word_count' 'char_count' 'sentence_count' 'avg_word_length'
+ 'exclamation_count' 'question_count' 'uppercase_ratio'
+ 'punctuation_count' 'user_prior_reviews' 'user_prior_unique_products'
+ 'user_prior_avg_rating' 'user_prior_avg_review_length'
+ 'days_since_user_previous_review' 'review_year' 'review_month'
+ 'review_day_of_week' 'user_prior_reviews_7d' 'user_prior_reviews_30d'
+ 'user_prior_reviews_90d' 'user_prior_reviews_365d'
+ 'user_prior_rating_variance' 'user_burstiness_flag'
+ 'product_prior_reviews' 'product_prior_unique_users'
+ 'product_prior_avg_rating' 'product_prior_rating_variance'
+ 'days_since_product_previous_review' 'product_prior_reviews_7d'
+ 'product_prior_reviews_30d' 'product_prior_reviews_90d'
+ 'product_prior_reviews_365d' 'normalized_text_length'
+ 'review_text_duplicate_count' 'review_text_is_duplicate'
+ 'review_text_reuse_ratio' 'user_rating_deviation'
+ 'user_product_diversity' 'user_rating_std' 'product_rating_deviation'
+ 'product_user_diversity' 'repeated_word_ratio']
+
+MODEL: phase16_semantic_model.joblib
+TYPE: <class 'sklearn.ensemble._hist_gradient_boosting.gradient_boosting.HistGradientBoostingClassifier'>
+CLASSES: [0 1]
+FEATURE COUNT: 43
+FEATURE NAMES: ['word_count' 'char_count' 'sentence_count' 'avg_word_length'
+ 'exclamation_count' 'question_count' 'uppercase_ratio'
+ 'punctuation_count' 'user_prior_reviews' 'user_prior_unique_products'
+ 'user_prior_avg_rating' 'user_prior_avg_review_length'
+ 'days_since_user_previous_review' 'review_year' 'review_month'
+ 'review_day_of_week' 'user_prior_reviews_7d' 'user_prior_reviews_30d'
+ 'user_prior_reviews_90d' 'user_prior_reviews_365d'
+ 'user_prior_rating_variance' 'user_burstiness_flag'
+ 'product_prior_reviews' 'product_prior_unique_users'
+ 'product_prior_avg_rating' 'product_prior_rating_variance'
+ 'days_since_product_previous_review' 'product_prior_reviews_7d'
+ 'product_prior_reviews_30d' 'product_prior_reviews_90d'
+ 'product_prior_reviews_365d' 'normalized_text_length'
+ 'review_text_duplicate_count' 'review_text_is_duplicate'
+ 'review_text_reuse_ratio' 'user_rating_deviation'
+ 'user_product_diversity' 'user_rating_std' 'product_rating_deviation'
+ 'product_user_diversity' 'repeated_word_ratio'
+ 'max_prior_20_product_similarity' 'prior_product_review_count']
+
+MODEL: phase17_trust_logistic_model.joblib
+TYPE: <class 'sklearn.pipeline.Pipeline'>
+CLASSES: [0 1]
+FEATURE COUNT: 4
+FEATURE NAMES: ['reviewer_history_trust_signal' 'product_context_trust_signal'
+ 'text_trust_signal' 'rating_consistency_trust_signal']
+PIPELINE STEPS: ['standardscaler', 'logisticregression']

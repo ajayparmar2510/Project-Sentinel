@@ -1,0 +1,6 @@
+review_length_group,Improved: fake review detected,Improved: genuine review correctly cleared,Regressed: fake review missed,Regressed: genuine review flagged
+0-20,96,186,59,285
+21-50,177,459,121,552
+51-100,133,372,82,452
+101-200,80,156,44,229
+201+,19,86,29,76

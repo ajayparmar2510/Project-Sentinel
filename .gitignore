@@ -1,0 +1,42 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+*.log
+
+backups/
+frontend/
+node_modules/
+dist/
+
+.env
+.streamlit/secrets.toml
+
+*.sqlite3
+*.db
+*.npy
+*.parquet
+
+results/phase5_engineered_features.csv
+
+# Local model cache; not needed for dashboard deployment
+models/hf_cache/
+
+# Large local artifacts not required to run the Streamlit dashboard
+results/historical_reviews.sqlite3
+results/phase16_full_embeddings.npy
+
+# Large local artifacts not required to run the Streamlit dashboard
+results/historical_reviews.sqlite3
+results/phase16_full_embeddings.npy
+
+# Duplicate project backups — originals remain on this Mac
+Project_Sentinel_Backup/
+Project_Sentinel_Backup_*/
+dashboard.py.backup*
+dashboard.py.before*
+dashboard_before_*.py
+api.py.backup
+assets/*.backup*
+assets/*.before*

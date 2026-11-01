@@ -1,0 +1,130 @@
+{
+  "method": "Permutation importance",
+  "scoring_metric": "Average precision (PR-AUC)",
+  "sample_size": 5000,
+  "repeats_per_feature": 3,
+  "random_state": 42,
+  "interpretation": "Importance is the decrease in average precision after shuffling a feature. It measures predictive reliance, not causation.",
+  "models": {
+    "baseline": {
+      "feature_count": 41,
+      "sample_records": 5000,
+      "sample_average_precision": 0.3735025475076379,
+      "elapsed_seconds": 2.5,
+      "csv_file": "phase5_baseline_permutation_importance.csv",
+      "plot_file": "phase5_baseline_permutation_importance.png",
+      "top_10_features": [
+        {
+          "feature": "days_since_product_previous_review",
+          "importance_mean": 0.052309110978936146,
+          "importance_std": 0.001281538532626819
+        },
+        {
+          "feature": "user_prior_avg_review_length",
+          "importance_mean": 0.0396221057822147,
+          "importance_std": 0.006613080166111311
+        },
+        {
+          "feature": "user_prior_reviews",
+          "importance_mean": 0.03623993246201481,
+          "importance_std": 0.00845310013061354
+        },
+        {
+          "feature": "days_since_user_previous_review",
+          "importance_mean": 0.029196580361337116,
+          "importance_std": 0.005051581997135612
+        },
+        {
+          "feature": "punctuation_count",
+          "importance_mean": 0.02587873196743738,
+          "importance_std": 0.00563672848926223
+        },
+        {
+          "feature": "product_prior_reviews_30d",
+          "importance_mean": 0.024504555348633883,
+          "importance_std": 0.0041414494192532295
+        },
+        {
+          "feature": "product_rating_deviation",
+          "importance_mean": 0.02258754370651415,
+          "importance_std": 0.006364267477456549
+        },
+        {
+          "feature": "product_prior_avg_rating",
+          "importance_mean": 0.01947301791556148,
+          "importance_std": 0.0006624679012609851
+        },
+        {
+          "feature": "product_prior_reviews",
+          "importance_mean": 0.01748497859585929,
+          "importance_std": 0.004660199156382406
+        },
+        {
+          "feature": "product_prior_rating_variance",
+          "importance_mean": 0.01298598290482498,
+          "importance_std": 0.0015199682227939844
+        }
+      ]
+    },
+    "semantic": {
+      "feature_count": 43,
+      "sample_records": 5000,
+      "sample_average_precision": 0.3804804443917491,
+      "elapsed_seconds": 3.46,
+      "csv_file": "phase5_semantic_permutation_importance.csv",
+      "plot_file": "phase5_semantic_permutation_importance.png",
+      "top_10_features": [
+        {
+          "feature": "days_since_product_previous_review",
+          "importance_mean": 0.05550996693125515,
+          "importance_std": 0.0009286600095619542
+        },
+        {
+          "feature": "user_prior_reviews",
+          "importance_mean": 0.045549005050401714,
+          "importance_std": 0.011223872637789735
+        },
+        {
+          "feature": "user_prior_avg_review_length",
+          "importance_mean": 0.04229766192495926,
+          "importance_std": 0.006332295157801802
+        },
+        {
+          "feature": "days_since_user_previous_review",
+          "importance_mean": 0.02922890663040158,
+          "importance_std": 0.005509661188313669
+        },
+        {
+          "feature": "product_prior_reviews_30d",
+          "importance_mean": 0.027711127119107577,
+          "importance_std": 0.0024541025809960443
+        },
+        {
+          "feature": "punctuation_count",
+          "importance_mean": 0.02750601029984227,
+          "importance_std": 0.003083039791768078
+        },
+        {
+          "feature": "product_prior_avg_rating",
+          "importance_mean": 0.021737333304596335,
+          "importance_std": 0.00040771380595118733
+        },
+        {
+          "feature": "product_rating_deviation",
+          "importance_mean": 0.02119163774068163,
+          "importance_std": 0.004214223470322985
+        },
+        {
+          "feature": "product_prior_rating_variance",
+          "importance_mean": 0.014811741482669246,
+          "importance_std": 0.0008957770795461746
+        },
+        {
+          "feature": "product_prior_reviews",
+          "importance_mean": 0.011727616583434963,
+          "importance_std": 0.0023221999990385212
+        }
+      ]
+    }
+  }
+}

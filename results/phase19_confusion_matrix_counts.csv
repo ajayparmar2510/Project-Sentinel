@@ -1,0 +1,9 @@
+model,actual,predicted,count
+baseline,Genuine,Genuine,67876
+baseline,Genuine,Fake,11721
+baseline,Fake,Genuine,6026
+baseline,Fake,Fake,6094
+semantic,Genuine,Genuine,67541
+semantic,Genuine,Fake,12056
+semantic,Fake,Genuine,5856
+semantic,Fake,Fake,6264

@@ -1,0 +1,109 @@
+======================================================================
+PROJECT SENTINEL — PHASE 16 SEMANTIC MODEL COMPARISON
+======================================================================
+Mode: TRAIN AND EVALUATE
+Loading train datasets...
+Loading validation datasets...
+Loading test datasets...
+{
+  "status": "passed",
+  "checks": [
+    "train: PASS",
+    "validation: PASS",
+    "test: PASS"
+  ],
+  "splits": {
+    "train": {
+      "rows": 425794,
+      "audit_rows": 425794,
+      "unique_row_ids": 425794,
+      "original_feature_count": 41,
+      "semantic_feature_count": 43,
+      "undefined_similarity_rows": 4627,
+      "defined_similarity_rows": 421167,
+      "zero_prior_product_history_rows": 4627,
+      "target_labels_identical": true,
+      "original_features_identical_in_order": true
+    },
+    "validation": {
+      "rows": 91087,
+      "audit_rows": 91087,
+      "unique_row_ids": 91087,
+      "original_feature_count": 41,
+      "semantic_feature_count": 43,
+      "undefined_similarity_rows": 395,
+      "defined_similarity_rows": 90692,
+      "zero_prior_product_history_rows": 395,
+      "target_labels_identical": true,
+      "original_features_identical_in_order": true
+    },
+    "test": {
+      "rows": 91717,
+      "audit_rows": 91717,
+      "unique_row_ids": 91717,
+      "original_feature_count": 41,
+      "semantic_feature_count": 43,
+      "undefined_similarity_rows": 330,
+      "defined_similarity_rows": 91387,
+      "zero_prior_product_history_rows": 330,
+      "target_labels_identical": true,
+      "original_features_identical_in_order": true
+    }
+  },
+  "notes": [
+    "Model CSVs do not contain row_id or identity columns.",
+    "Separate M3 audit CSVs provide row identity and ordering."
+  ]
+}
+
+AUDIT REPORT SAVED: /Users/apple/Downloads/YelpZip_Milestone2/Milestone3/Milestone4/results/phase16_model_comparison_input_audit.json
+
+INPUT AUDIT: PASSED
+Audit report: /Users/apple/Downloads/YelpZip_Milestone2/Milestone3/Milestone4/results/phase16_model_comparison_input_audit.json
+
+======================================================================
+TRAINING: BASELINE MODEL
+======================================================================
+Feature count: 41
+Training time: 7.33 seconds
+Validation-selected threshold: 0.20
+Test precision: 0.342071
+Test recall:    0.502805
+Test F1:        0.407149
+Test ROC-AUC:   0.793433
+Test PR-AUC:    0.372897
+Confusion matrix: TN=67876, FP=11721, FN=6026, TP=6094
+Saved model: /Users/apple/Downloads/YelpZip_Milestone2/Milestone3/Milestone4/models/phase16_baseline_model.joblib
+
+======================================================================
+TRAINING: SEMANTIC MODEL
+======================================================================
+Feature count: 43
+Training time: 7.45 seconds
+Validation-selected threshold: 0.20
+Test precision: 0.341921
+Test recall:    0.516832
+Test F1:        0.411564
+Test ROC-AUC:   0.794974
+Test PR-AUC:    0.376418
+Confusion matrix: TN=67541, FP=12056, FN=5856, TP=6264
+Saved model: /Users/apple/Downloads/YelpZip_Milestone2/Milestone3/Milestone4/models/phase16_semantic_model.joblib
+
+======================================================================
+MODEL COMPARISON COMPLETED
+======================================================================
+ threshold  precision   recall       f1  accuracy  roc_auc   pr_auc    tn    fp   fn   tp    model  feature_count  train_records  validation_records  test_records  validation_best_f1  validation_roc_auc  validation_pr_auc  training_time_sec  test_prediction_time_sec  learning_rate  max_iter  max_leaf_nodes  min_samples_leaf  l2_regularization  random_state
+       0.2   0.342071 0.502805 0.407149  0.806503 0.793433 0.372897 67876 11721 6026 6094 baseline             41         425794               91087         91717            0.392048            0.803478           0.358810           7.327473                  0.240258           0.08       250              31                20                1.0            42
+       0.2   0.341921 0.516832 0.411564  0.804704 0.794974 0.376418 67541 12056 5856 6264 semantic             43         425794               91087         91717            0.395032            0.802754           0.357251           7.448173                  0.242758           0.08       250              31                20                1.0            42
+
+Semantic minus baseline:
+{
+  "precision_difference_semantic_minus_baseline": -0.00014989086033428967,
+  "recall_difference_semantic_minus_baseline": 0.014026402640264002,
+  "f1_difference_semantic_minus_baseline": 0.004414909483030138,
+  "accuracy_difference_semantic_minus_baseline": -0.001799012178767323,
+  "roc_auc_difference_semantic_minus_baseline": 0.001540953560160041,
+  "pr_auc_difference_semantic_minus_baseline": 0.0035214339685413765
+}
+
+Results saved under: /Users/apple/Downloads/YelpZip_Milestone2/Milestone3/Milestone4/results

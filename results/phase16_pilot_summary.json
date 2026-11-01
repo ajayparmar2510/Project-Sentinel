@@ -1,0 +1,11 @@
+{
+  "phase": "16.1",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "device": "mps",
+  "sample_size": 2000,
+  "embedding_dimensions": 384,
+  "embeddings_finite": true,
+  "embedding_norm_mean": 1.0,
+  "elapsed_seconds": 38.38,
+  "note": "Pilot only. No classifier evaluation or fraud-performance claim is made from this sample."
+}

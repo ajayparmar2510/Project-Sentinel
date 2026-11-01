@@ -1,0 +1,24 @@
+{
+  "phase": "16.3",
+  "status": "completed",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "device": "mps",
+  "total_rows": 608598,
+  "embedding_dimensions": 384,
+  "window_size": 20,
+  "row_id_unique": true,
+  "feature_rows": 608598,
+  "rows_with_prior_product_reviews": 603554,
+  "rows_with_defined_similarity": 603554,
+  "rows_without_defined_similarity": 5044,
+  "similarity_min": -0.06694360077381134,
+  "similarity_max": 1.000000238418579,
+  "elapsed_seconds": 4772.59,
+  "limitations": [
+    "Similarity compares only the previous 20 reviews for the same product.",
+    "Reviews are ordered by date and then source row_id.",
+    "Similarity is undefined when no eligible earlier product review exists.",
+    "Semantic features do not use fraud labels.",
+    "No classifier improvement is claimed by feature generation alone."
+  ]
+}

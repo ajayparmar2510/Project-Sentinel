@@ -1,0 +1,20 @@
+{
+  "phase": "19.5",
+  "test_rows": 91717,
+  "threshold": 0.2,
+  "groups": {
+    "rating": {
+      "group_count": 5,
+      "f1_improved": 2,
+      "f1_worsened": 3,
+      "f1_unchanged": 0
+    },
+    "length": {
+      "group_count": 5,
+      "f1_improved": 4,
+      "f1_worsened": 1,
+      "f1_unchanged": 0
+    }
+  },
+  "caveat": "Descriptive subgroup evaluation only. YelpZip labels are the evaluation reference, not independent confirmation of fraud. No statistical significance is claimed."
+}

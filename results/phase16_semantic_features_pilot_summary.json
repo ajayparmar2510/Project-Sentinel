@@ -1,0 +1,22 @@
+{
+  "phase": "16.2",
+  "status": "pilot",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "device": "mps",
+  "sample_size": 2000,
+  "embedding_dimensions": 384,
+  "embedding_values_finite": true,
+  "row_id_unique": true,
+  "feature_rows": 2000,
+  "rows_with_prior_sampled_product_reviews": 1018,
+  "similarity_values_defined": 1018,
+  "similarity_min": -0.0019366294145584106,
+  "similarity_max": 0.8517035245895386,
+  "elapsed_seconds": 23.51,
+  "limitations": [
+    "Similarity is computed only against earlier reviews in the sample.",
+    "This is a pipeline pilot, not a full-dataset semantic feature set.",
+    "No classifier performance claim is made.",
+    "Rows without an earlier sampled review have undefined similarity."
+  ]
+}

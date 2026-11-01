@@ -1,0 +1,20 @@
+{
+  "phase": "16.3-corrected",
+  "status": "completed",
+  "total_rows": 608598,
+  "embedding_dimensions": 384,
+  "window_size": 20,
+  "ordering_rule": "Only strictly earlier calendar dates are eligible. Same-day reviews are excluded from comparisons and prior counts.",
+  "row_id_unique": true,
+  "feature_rows": 608598,
+  "rows_with_prior_product_reviews": 603246,
+  "rows_with_defined_similarity": 603246,
+  "rows_without_defined_similarity": 5352,
+  "similarity_min": -0.06694361,
+  "similarity_max": 1.0,
+  "similarity_values_clipped_to_range": true,
+  "elapsed_seconds": 20.25,
+  "source_embeddings_reused": "/Users/apple/Downloads/YelpZip_Milestone2/Milestone3/Milestone4/results/phase16_full_embeddings.npy",
+  "feature_file": "/Users/apple/Downloads/YelpZip_Milestone2/Milestone3/Milestone4/results/phase16_semantic_features_strict_date.csv",
+  "note": "Feature generation only; classifier improvement has not yet been evaluated."
+}

@@ -1,0 +1,15 @@
+{
+  "phase": "17",
+  "status": "score_artifact_created",
+  "rows": 608598,
+  "unique_row_ids": 608598,
+  "score_min": 0.2516606501688174,
+  "score_max": 40.43369004742564,
+  "score_mean": 13.602698772679878,
+  "score_median": 9.445553314821485,
+  "model": "Regularized logistic regression using four existing trust components",
+  "interpretation": "Relative risk index on a 0-100 scale; not a calibrated probability",
+  "fake_label_in_score_file": false,
+  "source_m3_modified": false,
+  "output_file": "results/phase17_trust_intelligence_scores.csv"
+}

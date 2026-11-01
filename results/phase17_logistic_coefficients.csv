@@ -1,0 +1,5 @@
+component,standardized_coefficient,risk_direction,absolute_coefficient
+reviewer_history_trust_signal,-1.1334101682159121,Higher component value decreases predicted risk,1.1334101682159121
+rating_consistency_trust_signal,-0.428278980008148,Higher component value decreases predicted risk,0.428278980008148
+product_context_trust_signal,-0.06360935900507954,Higher component value decreases predicted risk,0.06360935900507954
+text_trust_signal,0.02284281820086424,Higher component value increases predicted risk,0.02284281820086424

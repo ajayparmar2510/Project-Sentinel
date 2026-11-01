@@ -1,0 +1,13 @@
+{
+  "phase": "18.2",
+  "status": "minimum_activity_rankings_created",
+  "minimum_reviews": 5,
+  "reviewer_entities_total": 260277,
+  "reviewer_entities_eligible": 23831,
+  "product_entities_total": 5044,
+  "product_entities_eligible": 4126,
+  "interpretation": "Exploratory descriptive rankings; not evidence that an entity is fraudulent. The five-review minimum is a reporting rule.",
+  "original_profile_files_modified": false,
+  "reviewer_ranking_file": "results/phase18_reviewer_rankings_min5.csv",
+  "product_ranking_file": "results/phase18_product_rankings_min5.csv"
+}

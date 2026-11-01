@@ -1,0 +1,12 @@
+{
+  "phase": "17.3",
+  "status": "validation_calibration_audit",
+  "validation_rows": 91087,
+  "actual_fake_rate": 0.11961092142676781,
+  "mean_predicted_risk": 0.1373838789974929,
+  "brier_score": 0.10022919041913098,
+  "log_loss": 0.3379738434341333,
+  "weighted_absolute_calibration_gap": 0.02528011533788303,
+  "bins_file": "results/phase17_validation_calibration_bins.csv",
+  "test_set_used": false
+}

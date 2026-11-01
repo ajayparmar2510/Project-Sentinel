@@ -1,0 +1,134 @@
+{
+  "project": "Project Sentinel",
+  "purpose": "Submission artifact inventory",
+  "generated_utc": "2026-10-15T06:28:33.910651+00:00",
+  "artifact_count": 25,
+  "artifacts": [
+    {
+      "path": "README_SUBMISSION.md",
+      "size_bytes": 4763,
+      "sha256": "ac6ad8e8118009df2329443ffe2b5f8b55a243c649f81bbfb4d42433352795d0"
+    },
+    {
+      "path": "documentation/phase19_final_report.md",
+      "size_bytes": 4807,
+      "sha256": "289b7cc9e6a8f53e17f2fdd791865ff6cde0338926b0988e704d340fac325b2a"
+    },
+    {
+      "path": "results/phase16_model_comparison_metrics.csv",
+      "size_bytes": 900,
+      "sha256": "85ee6a2e1d42df3c25f25203ee853b5c6954ecbb60687a9898e3b32317b7a040"
+    },
+    {
+      "path": "results/phase16_model_comparison_summary.json",
+      "size_bytes": 3081,
+      "sha256": "225674f33d39c616c17b82c7347b72adae86215c12a6e44dd74ff4120ec46a0e"
+    },
+    {
+      "path": "results/phase16_model_comparison_test_predictions.csv",
+      "size_bytes": 4892194,
+      "sha256": "f6dfc414a76e96eabd72423f9d4dfe7c4a7d97d396188c635e1fc931d771fc18"
+    },
+    {
+      "path": "results/phase16_model_comparison_validation_thresholds.csv",
+      "size_bytes": 2060,
+      "sha256": "97a2ba2e343f7d6b137dff52c1b2bfaf9b016390de91ea6760668a0cd4cea9f2"
+    },
+    {
+      "path": "results/phase16_model_comparison_input_audit.json",
+      "size_bytes": 1441,
+      "sha256": "dc358f114d060e94ad54e46097ba26d0902234bb09589fcb11075a15c91873c7"
+    },
+    {
+      "path": "results/phase17_trust_intelligence_scores.csv",
+      "size_bytes": 66555116,
+      "sha256": "eb60a37dc18bb0a72787f9da15c32ef4c06f972d73e0983e9ccfeeea4c3e9eb2"
+    },
+    {
+      "path": "results/phase17_score_design_comparison.json",
+      "size_bytes": 2249,
+      "sha256": "d8c1b24d9d963095a5cd9e896ea44b7eda024c05ad70fef3be4643762ba4092a"
+    },
+    {
+      "path": "results/phase18_reviewer_profiles_corrected.csv",
+      "size_bytes": 26995716,
+      "sha256": "fe817d4859827cce939309f643c0508f757735b329ef66ee01ac6c33fbf976bd"
+    },
+    {
+      "path": "results/phase18_product_profiles.csv",
+      "size_bytes": 616001,
+      "sha256": "5339e345432cda9e193dcddde3b6d352de0899acd995c623def026848556fa68"
+    },
+    {
+      "path": "results/phase18_reviewer_rankings_min5.csv",
+      "size_bytes": 2959366,
+      "sha256": "c1e457194241341fcca31e70fd8ef9487aeff65d66941733daa547ed00970350"
+    },
+    {
+      "path": "results/phase18_product_rankings_min5.csv",
+      "size_bytes": 537266,
+      "sha256": "c0a70e95d1de22b3fe65d76d5db49b8abe6636c65bc70fdfd50e94b04baf7c5d"
+    },
+    {
+      "path": "results/phase19_overall_test_metrics.csv",
+      "size_bytes": 496,
+      "sha256": "25732838c30cc8292b5cec5220bc5193338038607f293c8a4d47203039a10af0"
+    },
+    {
+      "path": "results/phase19_confusion_matrix_counts.csv",
+      "size_bytes": 249,
+      "sha256": "1e521792738413aeaffdad7f0da88751adb608b4b02f047c818bf3adbe292986"
+    },
+    {
+      "path": "results/phase19_subgroup_error_analysis.csv",
+      "size_bytes": 2845,
+      "sha256": "92b242a03487009b9ace44915990a87fcb3c30af458b5d54dfdc7d1e6f3dda09"
+    },
+    {
+      "path": "results/phase19_changed_prediction_summary.csv",
+      "size_bytes": 174,
+      "sha256": "e2395d29fab6ac87bb482836bbed27208c64efbd3ff6ffb139b51365b0367a39"
+    },
+    {
+      "path": "results/phase19_change_rates_by_rating.csv",
+      "size_bytes": 215,
+      "sha256": "910a69a237394d9f8ccb2a007430eae2736ed2c78e29232b9e4f8c05af492abb"
+    },
+    {
+      "path": "results/phase19_change_rates_by_review_length_group.csv",
+      "size_bytes": 242,
+      "sha256": "06a6fd2a57dc43263c6bbe5133a924cb07d16d463f53282e0c8bfcd7220badb2"
+    },
+    {
+      "path": "results/phase19_subgroup_performance_by_rating.csv",
+      "size_bytes": 1639,
+      "sha256": "126a0a04e60a992954cc00ada556aa4cd9f4126add68534da535426c0a2cff57"
+    },
+    {
+      "path": "results/phase19_subgroup_performance_by_length.csv",
+      "size_bytes": 1631,
+      "sha256": "d718d5062afefd1d1053d172654a32887bddddb67d74e155ab887caa5d23b0d4"
+    },
+    {
+      "path": "results/phase19_subgroup_performance_summary.json",
+      "size_bytes": 496,
+      "sha256": "97d73346fa95357e77b716531668b73d2814ee2d7ff30265e9bca4f1040aae41"
+    },
+    {
+      "path": "models/phase16_baseline_model.joblib",
+      "size_bytes": 952664,
+      "sha256": "259b32a67188210b5d306dcaee75b5e22fe6075af638a1c9e5887285a8336536"
+    },
+    {
+      "path": "models/phase16_semantic_model.joblib",
+      "size_bytes": 956728,
+      "sha256": "550c11c930f74d4e8032cf56faeb3ef9c3b67dbfe783dd732512a1f111bab9fe"
+    },
+    {
+      "path": "models/phase17_trust_logistic_model.joblib",
+      "size_bytes": 1841,
+      "sha256": "d0b1074f4fd1bc5bf6e181c37bc12386f1ff5e6fab6af5d4a062136bc480ba93"
+    }
+  ],
+  "note": "SHA-256 hashes identify files at manifest-generation time. Risk scores are exploratory and are not proof of fraud."
+}

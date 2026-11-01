@@ -1,0 +1,5 @@
+change_type,count
+Improved: fake review detected,505
+Improved: genuine review correctly cleared,1259
+Regressed: fake review missed,335
+Regressed: genuine review flagged,1594

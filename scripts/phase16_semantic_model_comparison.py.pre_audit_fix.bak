@@ -1,0 +1,463 @@
+import os
+import sys
+import json
+import time
+import joblib
+import numpy as np
+import pandas as pd
+
+from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.metrics import (
+    precision_score,
+    recall_score,
+    f1_score,
+    accuracy_score,
+    roc_auc_score,
+    average_precision_score,
+    confusion_matrix,
+)
+
+M3_DIR = "/Users/apple/Downloads/YelpZip_Milestone2/Milestone3"
+M4_DIR = os.path.join(M3_DIR, "Milestone4")
+RESULTS_DIR = os.path.join(M4_DIR, "results")
+MODELS_DIR = os.path.join(M4_DIR, "models")
+
+os.makedirs(RESULTS_DIR, exist_ok=True)
+os.makedirs(MODELS_DIR, exist_ok=True)
+
+TARGET = "fake_label"
+SEMANTIC_COLUMNS = [
+    "max_prior_20_product_similarity",
+    "prior_product_review_count",
+]
+BASE_COLUMNS = {
+    "row_id", "user_id", "prod_id", "rating", "fake_label", "date"
+}
+THRESHOLDS = [0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50]
+
+SPLITS = {
+    "train": (
+        os.path.join(M3_DIR, "results", "train_model.csv"),
+        os.path.join(RESULTS_DIR, "phase16_train_semantic_model.csv"),
+    ),
+    "validation": (
+        os.path.join(M3_DIR, "results", "validation_model.csv"),
+        os.path.join(RESULTS_DIR, "phase16_validation_semantic_model.csv"),
+    ),
+    "test": (
+        os.path.join(M3_DIR, "results", "test_model.csv"),
+        os.path.join(RESULTS_DIR, "phase16_test_semantic_model.csv"),
+    ),
+}
+
+MODEL_PARAMETERS = {
+    "learning_rate": 0.08,
+    "max_iter": 250,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 20,
+    "l2_regularization": 1.0,
+    "random_state": 42,
+}
+
+def load_datasets():
+    data = {}
+    for split, (base_path, semantic_path) in SPLITS.items():
+        if not os.path.isfile(base_path):
+            raise FileNotFoundError(f"Missing M3 dataset: {base_path}")
+        if not os.path.isfile(semantic_path):
+            raise FileNotFoundError(f"Missing M4 dataset: {semantic_path}")
+
+        print(f"Loading {split} datasets...")
+        data[split] = {
+            "base": pd.read_csv(base_path),
+            "semantic": pd.read_csv(semantic_path),
+        }
+    return data
+
+def audit_datasets(data):
+    expected_base_features = None
+    total_rows = 0
+    audit_summary = {}
+
+    for split, pair in data.items():
+        base = pair["base"]
+        semantic = pair["semantic"]
+
+        print(f"\nAuditing {split.upper()} split...")
+
+        if TARGET not in base or TARGET not in semantic:
+            raise ValueError(f"{split}: target column is missing.")
+
+        if base.columns[-1] != TARGET:
+            raise ValueError(f"{split}: M3 target is not the final column.")
+        if semantic.columns[-1] != TARGET:
+            raise ValueError(f"{split}: M4 target is not the final column.")
+
+        if not set(SEMANTIC_COLUMNS).issubset(semantic.columns):
+            raise ValueError(f"{split}: semantic columns are missing.")
+
+        base_features = [c for c in base.columns if c not in BASE_COLUMNS]
+        semantic_features = [
+            c for c in semantic.columns if c not in BASE_COLUMNS
+        ]
+
+        if len(base_features) != 41:
+            raise ValueError(
+                f"{split}: expected 41 M3 features, got {len(base_features)}"
+            )
+        if semantic_features != base_features + SEMANTIC_COLUMNS:
+            raise ValueError(
+                f"{split}: M4 features do not preserve the expected order."
+            )
+
+        if expected_base_features is None:
+            expected_base_features = base_features
+        elif base_features != expected_base_features:
+            raise ValueError(f"{split}: M3 feature order differs across splits.")
+
+        if len(base) != len(semantic):
+            raise ValueError(f"{split}: M3 and M4 row counts differ.")
+
+        if base["row_id"].duplicated().any():
+            raise ValueError(f"{split}: duplicate M3 row_id values.")
+        if semantic["row_id"].duplicated().any():
+            raise ValueError(f"{split}: duplicate M4 row_id values.")
+
+        if not np.array_equal(
+            base["row_id"].to_numpy(),
+            semantic["row_id"].to_numpy()
+        ):
+            raise ValueError(f"{split}: row_id alignment failed.")
+
+        for col in ["user_id", "prod_id", "rating", "date", TARGET]:
+            if not base[col].equals(semantic[col]):
+                raise ValueError(f"{split}: column mismatch: {col}")
+
+        # Verify every original M3 feature value is unchanged.
+        try:
+            pd.testing.assert_frame_equal(
+                base[base_features],
+                semantic[base_features],
+                check_dtype=False,
+                check_exact=True,
+            )
+        except AssertionError as exc:
+            raise ValueError(
+                f"{split}: original M3 feature values changed."
+            ) from exc
+
+        if base[base_features].isnull().any().any():
+            raise ValueError(f"{split}: missing values in original M3 features.")
+
+        labels = set(base[TARGET].dropna().unique())
+        if not labels.issubset({0, 1}) or base[TARGET].isnull().any():
+            raise ValueError(f"{split}: invalid target labels.")
+
+        similarity = semantic[SEMANTIC_COLUMNS[0]].to_numpy(dtype=float)
+        prior_count = semantic[SEMANTIC_COLUMNS[1]].to_numpy(dtype=float)
+
+        if np.isinf(similarity).any() or np.isinf(prior_count).any():
+            raise ValueError(f"{split}: infinite semantic feature values.")
+        if np.isnan(prior_count).any():
+            raise ValueError(f"{split}: prior review count contains NaN.")
+        if (prior_count < 0).any():
+            raise ValueError(f"{split}: negative prior review counts.")
+
+        missing_similarity = int(np.isnan(similarity).sum())
+        zero_prior_count = int((prior_count == 0).sum())
+
+        if missing_similarity != zero_prior_count:
+            raise ValueError(
+                f"{split}: missing similarity does not match zero prior history."
+            )
+
+        if np.isfinite(similarity).any():
+            finite_similarity = similarity[np.isfinite(similarity)]
+            if (finite_similarity < -1.00001).any() or (
+                finite_similarity > 1.00001
+            ).any():
+                raise ValueError(f"{split}: similarity is outside cosine range.")
+
+        total_rows += len(base)
+        audit_summary[split] = {
+            "rows": int(len(base)),
+            "m3_feature_count": int(len(base_features)),
+            "m4_feature_count": int(len(semantic_features)),
+            "unique_row_ids": int(base["row_id"].nunique()),
+            "missing_similarity": missing_similarity,
+            "zero_prior_product_history": zero_prior_count,
+            "original_features_unchanged": True,
+            "row_alignment_passed": True,
+        }
+
+        print(f"  Rows: {len(base):,}")
+        print(f"  M3 features: {len(base_features)}")
+        print(f"  M4 features: {len(semantic_features)}")
+        print(f"  Undefined semantic similarities: {missing_similarity:,}")
+        print("  Original feature values: unchanged")
+        print("  Row alignment: PASSED")
+
+    return {
+        "status": "passed",
+        "purpose": "Input and row-alignment audit only; no model training.",
+        "total_rows_across_splits": total_rows,
+        "splits": audit_summary,
+    }
+
+def make_model():
+    return HistGradientBoostingClassifier(**MODEL_PARAMETERS)
+
+def validation_threshold_table(y_true, probabilities):
+    rows = []
+    for threshold in THRESHOLDS:
+        predicted = (probabilities >= threshold).astype(int)
+        rows.append({
+            "threshold": threshold,
+            "precision": precision_score(
+                y_true, predicted, zero_division=0
+            ),
+            "recall": recall_score(
+                y_true, predicted, zero_division=0
+            ),
+            "f1": f1_score(y_true, predicted, zero_division=0),
+        })
+    return pd.DataFrame(rows)
+
+def evaluate_at_threshold(y_true, probabilities, threshold):
+    predicted = (probabilities >= threshold).astype(int)
+    tn, fp, fn, tp = confusion_matrix(
+        y_true, predicted, labels=[0, 1]
+    ).ravel()
+
+    return {
+        "threshold": float(threshold),
+        "precision": float(precision_score(
+            y_true, predicted, zero_division=0
+        )),
+        "recall": float(recall_score(
+            y_true, predicted, zero_division=0
+        )),
+        "f1": float(f1_score(y_true, predicted, zero_division=0)),
+        "accuracy": float(accuracy_score(y_true, predicted)),
+        "roc_auc": float(roc_auc_score(y_true, probabilities)),
+        "pr_auc": float(average_precision_score(y_true, probabilities)),
+        "tn": int(tn),
+        "fp": int(fp),
+        "fn": int(fn),
+        "tp": int(tp),
+        "predicted_fake_count": int(predicted.sum()),
+    }
+
+def run_experiment(data):
+    results = []
+    threshold_tables = []
+    prediction_output = None
+
+    for model_name in ["baseline", "semantic"]:
+        print("\n" + "=" * 70)
+        print(f"TRAINING: {model_name.upper()} MODEL")
+        print("=" * 70)
+
+        train_df = data["train"][model_name]
+        val_df = data["validation"][model_name]
+        test_df = data["test"][model_name]
+
+        features = [
+            c for c in train_df.columns if c not in BASE_COLUMNS
+        ]
+        val_features = [
+            c for c in val_df.columns if c not in BASE_COLUMNS
+        ]
+        test_features = [
+            c for c in test_df.columns if c not in BASE_COLUMNS
+        ]
+
+        if features != val_features or features != test_features:
+            raise ValueError(f"{model_name}: feature order mismatch.")
+
+        X_train = train_df[features]
+        y_train = train_df[TARGET].astype(int)
+        X_val = val_df[features]
+        y_val = val_df[TARGET].astype(int)
+        X_test = test_df[features]
+        y_test = test_df[TARGET].astype(int)
+
+        if model_name == "baseline":
+            if X_train.isnull().any().any():
+                raise ValueError("Baseline training features contain missing values.")
+        else:
+            # HistGradientBoostingClassifier supports NaN natively.
+            # Preserve undefined similarity; do not impute it as zero.
+            if X_train[features[:-2]].isnull().any().any():
+                raise ValueError("Unexpected missing original features.")
+
+        model = make_model()
+        start = time.time()
+        model.fit(X_train, y_train)
+        training_seconds = time.time() - start
+
+        val_probabilities = model.predict_proba(X_val)[:, 1]
+        threshold_table = validation_threshold_table(y_val, val_probabilities)
+        threshold_table.insert(0, "model", model_name)
+        threshold_tables.append(threshold_table)
+
+        # Same validation threshold grid and maximum-F1 selection rule.
+        best_index = threshold_table["f1"].idxmax()
+        selected_threshold = float(
+            threshold_table.loc[best_index, "threshold"]
+        )
+
+        test_start = time.time()
+        test_probabilities = model.predict_proba(X_test)[:, 1]
+        prediction_seconds = time.time() - test_start
+
+        metrics = evaluate_at_threshold(
+            y_test, test_probabilities, selected_threshold
+        )
+        metrics.update({
+            "model": model_name,
+            "feature_count": len(features),
+            "train_records": len(train_df),
+            "validation_records": len(val_df),
+            "test_records": len(test_df),
+            "validation_best_f1": float(
+                threshold_table.loc[best_index, "f1"]
+            ),
+            "validation_roc_auc": float(
+                roc_auc_score(y_val, val_probabilities)
+            ),
+            "validation_pr_auc": float(
+                average_precision_score(y_val, val_probabilities)
+            ),
+            "training_time_sec": float(training_seconds),
+            "test_prediction_time_sec": float(prediction_seconds),
+            **MODEL_PARAMETERS,
+        })
+        results.append(metrics)
+
+        model_path = os.path.join(
+            MODELS_DIR, f"phase16_{model_name}_model.joblib"
+        )
+        joblib.dump(model, model_path)
+
+        if prediction_output is None:
+            prediction_output = pd.DataFrame({
+                "row_id": test_df["row_id"].to_numpy(),
+                "fake_label": y_test.to_numpy(),
+            })
+
+        prediction_output[f"{model_name}_probability"] = test_probabilities
+        prediction_output[f"{model_name}_prediction"] = (
+            test_probabilities >= selected_threshold
+        ).astype(int)
+
+        print(f"Feature count: {len(features)}")
+        print(f"Training time: {training_seconds:.2f} seconds")
+        print(f"Validation-selected threshold: {selected_threshold:.2f}")
+        print(f"Test precision: {metrics['precision']:.6f}")
+        print(f"Test recall:    {metrics['recall']:.6f}")
+        print(f"Test F1:        {metrics['f1']:.6f}")
+        print(f"Test ROC-AUC:   {metrics['roc_auc']:.6f}")
+        print(f"Test PR-AUC:    {metrics['pr_auc']:.6f}")
+        print(f"Confusion matrix: TN={metrics['tn']}, FP={metrics['fp']}, "
+              f"FN={metrics['fn']}, TP={metrics['tp']}")
+        print(f"Saved model: {model_path}")
+
+    metrics_df = pd.DataFrame(results)
+    thresholds_df = pd.concat(threshold_tables, ignore_index=True)
+
+    # Include paired differences: semantic minus baseline.
+    baseline = next(r for r in results if r["model"] == "baseline")
+    semantic = next(r for r in results if r["model"] == "semantic")
+    comparison = {}
+    for metric in [
+        "precision", "recall", "f1", "accuracy", "roc_auc", "pr_auc"
+    ]:
+        comparison[f"{metric}_difference_semantic_minus_baseline"] = (
+            semantic[metric] - baseline[metric]
+        )
+
+    summary = {
+        "phase": "16.4",
+        "status": "completed",
+        "experiment": "M3 baseline versus M4 semantic feature augmentation",
+        "threshold_rule": (
+            "Choose maximum validation F1 among thresholds "
+            "[0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50]."
+        ),
+        "test_usage": "Test set used only after model training and validation threshold selection.",
+        "missing_similarity_handling": (
+            "Preserved as NaN; HistGradientBoostingClassifier native "
+            "missing-value handling is used for the semantic model."
+        ),
+        "model_parameters": MODEL_PARAMETERS,
+        "results": results,
+        "semantic_minus_baseline": comparison,
+        "caution": (
+            "Compare models on the same test records. Differences are "
+            "empirical results, not proof of generalization beyond this dataset."
+        ),
+    }
+
+    metrics_df.to_csv(
+        os.path.join(RESULTS_DIR, "phase16_model_comparison_metrics.csv"),
+        index=False,
+    )
+    thresholds_df.to_csv(
+        os.path.join(RESULTS_DIR, "phase16_model_comparison_validation_thresholds.csv"),
+        index=False,
+    )
+    prediction_output.to_csv(
+        os.path.join(RESULTS_DIR, "phase16_model_comparison_test_predictions.csv"),
+        index=False,
+    )
+    with open(
+        os.path.join(RESULTS_DIR, "phase16_model_comparison_summary.json"),
+        "w",
+    ) as f:
+        json.dump(summary, f, indent=2)
+
+    print("\n" + "=" * 70)
+    print("MODEL COMPARISON COMPLETED")
+    print("=" * 70)
+    print(metrics_df.to_string(index=False))
+    print("\nSemantic minus baseline:")
+    print(json.dumps(comparison, indent=2))
+    print(f"\nResults saved under: {RESULTS_DIR}")
+
+def main():
+    audit_only = "--audit-only" in sys.argv
+
+    print("=" * 70)
+    print("PROJECT SENTINEL — PHASE 16 SEMANTIC MODEL COMPARISON")
+    print("=" * 70)
+    print("Mode:", "AUDIT ONLY" if audit_only else "TRAIN AND EVALUATE")
+
+    data = load_datasets()
+
+    # Convert names into a consistent mapping for each model.
+    model_data = {}
+    for split, pair in data.items():
+        model_data[split] = {
+            "baseline": pair["base"],
+            "semantic": pair["semantic"],
+        }
+
+    audit = audit_datasets(data)
+    audit_path = os.path.join(
+        RESULTS_DIR, "phase16_model_comparison_input_audit.json"
+    )
+    with open(audit_path, "w") as f:
+        json.dump(audit, f, indent=2)
+
+    print("\nINPUT AUDIT: PASSED")
+    print(f"Audit report: {audit_path}")
+
+    if audit_only:
+        print("Audit-only mode: no model was trained.")
+        return
+
+    run_experiment(model_data)
+
+if __name__ == "__main__":
+    main()
